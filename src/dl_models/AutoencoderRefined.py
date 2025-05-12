@@ -1,9 +1,8 @@
 from tensorflow.keras import layers, models
-from tensorflow.keras.optimizers import Adam, RMSprop, Nadam, SGD
+from tensorflow.keras.optimizers import Adam
+from tensorflow.keras import metrics
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split
-from tensorflow.keras.callbacks import EarlyStopping
-from tensorflow.keras.optimizers.schedules import ExponentialDecay
 
 def create_autoencoder_model(input_dim, latent_dim):
     r"""
@@ -43,7 +42,7 @@ def create_autoencoder_model(input_dim, latent_dim):
     optimizer = Adam(0.00007)
     
     # Compile the model with Adam optimizer and MSE loss function
-    model.compile(optimizer=optimizer, loss='mean_squared_error')
+    model.compile(optimizer=optimizer, loss='mean_squared_error', metrics=[metrics.mae])
 
     return model
 
@@ -113,15 +112,8 @@ def Autoencoder(features,
     # Create the autoencoder model
     model = create_autoencoder_model(input_dim=X_train.shape[1], latent_dim=latent_dim)  
     
-    early_stop = EarlyStopping(
-        monitor='loss',
-        patience=300,
-        restore_best_weights=True,
-        verbose=1
-    )
-    
     # Train the model
-    model.fit(X_train, X_train, epochs=epochs, batch_size=batch_size, callbacks=[early_stop], verbose=1)
+    model.fit(X_train, X_train, epochs=epochs, batch_size=batch_size, verbose=1)
 
     # Make predictions on the test data
     x_pred = model.predict(X_test)

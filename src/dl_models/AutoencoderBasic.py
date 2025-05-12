@@ -1,5 +1,6 @@
-from tensorflow.keras import layers, models, metrics
+from tensorflow.keras import layers, models
 from sklearn.preprocessing import MinMaxScaler
+from tensorflow.keras import metrics
 from sklearn.model_selection import train_test_split
 
 def create_autoencoder_model(input_dim, latent_dim):
