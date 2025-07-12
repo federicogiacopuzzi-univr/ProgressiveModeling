@@ -9,3 +9,15 @@ tensorflow==2.10.1
 scikit-learn==1.6.1
 matplotlib==3.10.1
 seaborn==0.13.2
+
+# TimesNet
+einops==0.8.0
+local-attention==1.9.14
+patool==1.12
+reformer-pytorch==1.4.4
+scipy==1.10.1
+sktime==0.16.1
+sympy==1.11.1
+torch==1.7.1
+tqdm==4.64.1
+PyWavelets
