@@ -132,7 +132,7 @@ def Autoencoder(features,
 
             fold_idx += 1
 
-        return np.concatenate(all_tests, axis=0), np.concatenate(all_preds, axis=0)
+        return np.concatenate(all_tests, axis=0), np.concatenate(all_preds, axis=0), model
 
     elif train_df is not None and test_df is not None:
         X_train_seq = create_sequences(X_train, timesteps)
@@ -142,7 +142,7 @@ def Autoencoder(features,
         model.fit(X_train_seq, X_train_seq, epochs=epochs, batch_size=batch_size, verbose=1)
 
         X_test_pred = model.predict(X_test_seq)
-        return X_test_seq, X_test_pred
+        return X_test_seq, X_test_pred, model
 
     else:
         # Default train/test split from full dataframe
@@ -154,4 +154,4 @@ def Autoencoder(features,
         model.fit(X_train_seq, X_train_seq, epochs=epochs, batch_size=batch_size, verbose=1)
 
         X_test_pred = model.predict(X_test_seq)
-        return X_test_seq, X_test_pred
+        return X_test_seq, X_test_pred, model

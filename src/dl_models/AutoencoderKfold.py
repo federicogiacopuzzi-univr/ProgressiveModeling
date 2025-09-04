@@ -115,7 +115,7 @@ def Autoencoder(features,
         model = create_autoencoder_model(input_dim=X_train.shape[1], latent_dim=latent_dim)
         model.fit(X_train, X_train, epochs=epochs, batch_size=batch_size, verbose=1)
         x_pred = model.predict(X_test)
-        return X_test, x_pred
+        return X_test, x_pred, model
     
     # If using a full dataframe and kfold > 1, perform K-Fold cross-validation
     if kfold > 1:
@@ -153,7 +153,7 @@ def Autoencoder(features,
         X_val_all = np.concatenate(all_tests, axis=0)
         preds_all = np.concatenate(all_preds, axis=0)
     
-        return X_val_all, preds_all
+        return X_val_all, preds_all, model
     
     else:
         # If no cross-validation, split the dataframe into train/test sets and train directly
@@ -161,4 +161,4 @@ def Autoencoder(features,
         model = create_autoencoder_model(input_dim=X_train.shape[1], latent_dim=latent_dim)
         model.fit(X_train, X_train, epochs=epochs, batch_size=batch_size, verbose=1)
         x_pred = model.predict(X_test)
-        return X_test, x_pred
+        return X_test, x_pred, model

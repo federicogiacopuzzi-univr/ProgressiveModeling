@@ -226,6 +226,12 @@ def plot_feature_importance(features, importances, stds, title="Feature Importan
         - stds (np.ndarray): Standard deviations of the importance scores.
         - title (str): Plot title.
         """
+        # Normalize importances and stds
+        max_importance = np.max(importances)
+        importances[importances < 0] = 0
+        importances = importances / max_importance
+        stds = stds / max_importance
+    
         sorted_idx = np.argsort(importances)
 
         plt.figure(figsize=(10, 6))
@@ -235,3 +241,29 @@ def plot_feature_importance(features, importances, stds, title="Feature Importan
         plt.grid(True)
         plt.tight_layout()
         plt.show()
+
+def plot_rfecv(rfecv):
+    """
+    Plot RFECV results using MSE scores.
+
+    Parameters
+    ----------
+    rfecv : RFECV
+        Fitted RFECV object.
+    """
+    if hasattr(rfecv, "cv_results_"):
+        scores = rfecv.cv_results_['mean_test_score']
+    elif hasattr(rfecv, "grid_scores_"):
+        scores = rfecv.grid_scores_
+    else:
+        raise AttributeError("RFECV object has no grid_scores_ or cv_results_")
+
+    n_features = range(1, len(scores) + 1)
+
+    plt.figure(figsize=(8,5))
+    plt.plot(n_features, scores, marker='o')
+    plt.xlabel("Number of features selected")
+    plt.ylabel("MSE (negative)")
+    plt.title("RFECV Feature Selection")
+    plt.grid(True)
+    plt.show()

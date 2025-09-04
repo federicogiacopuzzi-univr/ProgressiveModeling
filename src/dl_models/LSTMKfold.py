@@ -115,7 +115,7 @@ def lstm_forecast(features,
             all_y_tests.append(y_val)
             all_y_preds.append(y_pred)
 
-        return np.concatenate(all_y_tests, axis=0), np.concatenate(all_y_preds, axis=0)
+        return np.concatenate(all_y_tests, axis=0), np.concatenate(all_y_preds, axis=0), model
 
     else:
         # No cross-validation: normal train/test split or from train_df/test_df
@@ -135,4 +135,4 @@ def lstm_forecast(features,
 
         y_pred = model.predict(X_test)
 
-        return y_test, y_pred
+        return y_test, y_pred, model
