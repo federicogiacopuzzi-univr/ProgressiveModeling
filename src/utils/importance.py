@@ -17,6 +17,7 @@ def importance_autoencoder(model, X, features, n_repeats=10):
     - importance_means (np.ndarray): Mean increase in reconstruction error per feature.
     - importance_stds (np.ndarray): Std deviation of increases.
     """
+    
     baseline_preds = model.predict(X)
     baseline_error = np.mean((X - baseline_preds) ** 2)
 
@@ -54,6 +55,7 @@ def importance_lstm(model, X, y_true, features, n_repeats=10):
     - importance_means (np.ndarray): Mean increase in prediction error per feature.
     - importance_stds (np.ndarray): Std deviation of error increase per feature.
     """
+    
     baseline_pred = model.predict(X)
     baseline_error = np.mean((y_true - baseline_pred) ** 2)
 
@@ -93,6 +95,7 @@ def importance_autoencoder_lstm(model, X_seq, features, n_repeats=10):
     - importance_means (np.ndarray): Mean increase in reconstruction error per feature.
     - importance_stds (np.ndarray): Standard deviation of the increases.
     """
+    
     # Baseline reconstruction error
     baseline_preds = model.predict(X_seq)
     baseline_error = np.mean((X_seq - baseline_preds) ** 2)

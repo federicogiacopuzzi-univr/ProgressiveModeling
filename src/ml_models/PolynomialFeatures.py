@@ -30,7 +30,7 @@ def Polynomial(dataframe, features, target, grade):
 
     The function performs the following steps:
     1. Copies the input 'dataframe' to a new variable 'self_dataframe' for internal use.
-    2. Initializes a MinMaxScaler to scale the features between -1 and 1.
+    2. Initializes a MinMaxScaler to scale the features between 0 and 1.
     3. Iterates through the features (excluding the target variable), scaling each feature using the MinMaxScaler.
     4. Converts the preprocessed DataFrame into a NumPy array:
        - 'X' contains the scaled feature data (excluding the target).
@@ -47,8 +47,8 @@ def Polynomial(dataframe, features, target, grade):
     # Assign 'dataframe' to 'self_dataframe' to work with a new variable.
     self_dataframe = dataframe
 
-    # Initialize a MinMaxScaler to standardize features to a range between -1 and 1.
-    sc = MinMaxScaler(feature_range=(-1, 1))
+    # Initialize a MinMaxScaler to standardize features to a range between 0 and 1.
+    sc = MinMaxScaler(feature_range=(0, 1))
 
     # Define the target variable for later use.
     self_target = target

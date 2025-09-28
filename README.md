@@ -28,5 +28,5 @@ This project focuses on the development and comparison of several machine learni
 - torch==1.7.1
 - tqdm==4.64.1
 - PyWavelets
-## License
-See [Tigramite](https://github.com/jakobrunge/tigramite?tab=readme-ov-file#tigramite--causal-inference-for-time-series-datasets)
+
+This project was initially inspired by the [Isla-Lab Causal Forecasting Repository](https://github.com/Isla-lab/CausalForecasting/tree/main), which served as a starting point for model development.
